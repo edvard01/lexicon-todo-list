@@ -25,11 +25,32 @@ function updateList() {
   let html = "";
   listArray.forEach((item) => {
     console.log(item);
-    html += `<li><span class="left-section"><h2>${item.description}</h2>`;
-    html += `<h3>Author: ${item.author}</h3>`;
-    html += `<label>Done:</label>`;
-    html += `<input type="checkbox" id="${item.id}"></span>`;
-    html += `<span class="right-section"><h2 id="up">Move Up</h2><h2 id="down">Move Down</h2></span>`;
+    html += buildListItem(item);
   });
   list.innerHTML = html;
+  listArray.forEach((item) => {
+    setupMovement(item);
+  });
+}
+
+function buildListItem(item) {
+  let html = "";
+  html += `<li><span class="left-section"><h2>${item.description}</h2>`;
+  html += `<h3>Author: ${item.author}</h3>`;
+  html += `<label>Done:</label>`;
+  html += `<input type="checkbox" id="${item.id}"></span><br>`;
+  html += `<button id="up-${item.id}">Move Up</button><button id="down-${item.id}">Move Down</button></li>`;
+  return html;
+}
+
+function setupMovement(item) {
+  const btnUp = document.querySelector(`#up-${item.id}`);
+  const btnDown = document.querySelector(`#down-${item.id}`);
+
+  btnUp.addEventListener("click", (e) => {
+    console.log("up");
+  });
+  btnDown.addEventListener("click", (e) => {
+    console.log("down");
+  });
 }
