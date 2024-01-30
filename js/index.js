@@ -36,7 +36,17 @@ function buildListItem(item) {
   html += `<h3>Author: ${item.author}</h3>`;
   html += `<label>Done:</label>`;
   html += `<input type="checkbox" id="${item.id}"><br>`;
-  html += `<button id="up">Move Up</button><button id="down">Move Down</button></li>`;
+  html += `<span class="button-section">`;
+  html += `<span class="nav-btn">`;
+  html += `<button class="btn-move" id="up"><span class="material-symbols-outlined">
+north
+</span></button><button class="btn-move" id="down"><span class="material-symbols-outlined">
+south
+</span></button>`;
+  html += "</span>";
+  html += `<button class="btn-delete" id="delete"><span class="material-symbols-outlined">
+delete
+</span></button></span></li>`;
   return html;
 }
 
@@ -48,6 +58,9 @@ list.addEventListener("click", (e) => {
   } else if (e.target.tagName === "BUTTON" && e.target.id === "down") {
     let index = findIdx(e);
     moveDown(index);
+  } else if (e.target.tagName === "BUTTON" && e.target.id === "delete") {
+    let index = findIdx(e);
+    removeListItem(index);
   }
 });
 
@@ -86,30 +99,9 @@ function findIdx(e) {
   return index;
 }
 
-// function moveUp(element) {
-//   const list = Array.from(document.querySelector(".todo-list").children);
-//   console.log(element, list[1]);
-
-//   if (list.length > 1) {
-//     let temp;
-//     let currentIndex = 0;
-
-//     for (let index = 0; index < list.length; index++) {
-//       if (element === list[index]) {
-//         currentIndex = index;
-//         break;
-//       }
-//     }
-
-//     if (currentIndex !== 0) {
-//       temp = list[currentIndex - 1].innerHTML;
-//       list[currentIndex - 1].innerHTML = element.innerHTML;
-//       element.innerHTML = temp;
-//       console.log(temp);
-//     }
-//   } else {
-//     return "List is too short to move anything";
-//   }
-
-//   return true;
-// }
+function removeListItem(index) {
+  if (typeof listArray[index] !== "undefined") {
+    listArray.splice(index, 1);
+    updateList();
+  }
+}
