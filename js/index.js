@@ -21,10 +21,8 @@ btn.addEventListener("click", (e) => {
 
 function updateList() {
   const list = document.querySelector(".todo-list");
-  console.log(list);
   let html = "";
   listArray.forEach((item) => {
-    console.log(item);
     html += buildListItem(item);
   });
   list.innerHTML = html;
@@ -53,16 +51,13 @@ const list = document.querySelector(".todo-list");
 list.addEventListener("click", (e) => {
   if (e.target.tagName === "BUTTON" && e.target.id === "up") {
     let index = findIdx(e);
-    console.log("up");
     moveUp(index);
   } else if (e.target.tagName === "BUTTON" && e.target.id === "down") {
     let index = findIdx(e);
-    console.log("down");
     moveDown(index);
   } else if (e.target.tagName === "BUTTON" && e.target.id === "delete") {
     let index = findIdx(e);
     removeListItem(index);
-    console.log("delete");
   }
 });
 
@@ -92,7 +87,6 @@ function moveDown(index) {
 
 function findIdx(e) {
   let index = 0;
-  console.log(list.children[0], e.target.parentNode, list.children.length);
   for (let counter = 0; counter < list.children.length; counter++) {
     if (list.children[counter].innerHTML == e.target.parentNode.innerHTML) {
       index = counter;
