@@ -38,15 +38,14 @@ function buildListItem(item) {
   html += `<input type="checkbox" id="${item.id}"><br>`;
   html += `<span class="button-section">`;
   html += `<span class="nav-btn">`;
-  html += `<button class="btn-move" id="up"><span class="material-symbols-outlined">
+  html += `<button class="btn-move material-symbols-outlined" id="up">
 north
-</span></button><button class="btn-move" id="down"><span class="material-symbols-outlined">
+</button><button class="btn-move material-symbols-outlined" id="down">
 south
-</span></button>`;
+</button>`;
   html += "</span>";
-  html += `<button class="btn-delete" id="delete"><span class="material-symbols-outlined">
-delete
-</span></button></span></li>`;
+  html += `<button class="btn-delete material-symbols-outlined" id="delete">
+delete</button></span></li>`;
   return html;
 }
 
@@ -54,13 +53,16 @@ const list = document.querySelector(".todo-list");
 list.addEventListener("click", (e) => {
   if (e.target.tagName === "BUTTON" && e.target.id === "up") {
     let index = findIdx(e);
+    console.log("up");
     moveUp(index);
   } else if (e.target.tagName === "BUTTON" && e.target.id === "down") {
     let index = findIdx(e);
+    console.log("down");
     moveDown(index);
   } else if (e.target.tagName === "BUTTON" && e.target.id === "delete") {
     let index = findIdx(e);
     removeListItem(index);
+    console.log("delete");
   }
 });
 
